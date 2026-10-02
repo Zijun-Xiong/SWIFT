@@ -1,0 +1,18 @@
+# Based on NVlabs/DoRA commonsense_reasoning/requirements.txt.
+# PyTorch/CUDA are installed by environment.yml.
+accelerate==0.25.0
+appdirs==1.4.4
+bitsandbytes==0.41.3.post2
+black==23.12.0
+black[jupyter]==23.12.0
+datasets==2.15.0
+fire==0.5.0
+transformers==4.36.0
+gradio==4.9.0
+scipy==1.11.4
+sentencepiece==0.1.99
+protobuf==4.25.5
+huggingface-hub==0.19.4
+tokenizers==0.15.0
+numpy==1.26.4
+tqdm==4.66.4

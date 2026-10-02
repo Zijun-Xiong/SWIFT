@@ -1,0 +1,64 @@
+name: CPU smoke tests
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  commonsense:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+          cache: pip
+      - run: python -m pip install torch==2.1.0 --index-url https://download.pytorch.org/whl/cpu
+      - run: >-
+          python -m pip install
+          accelerate==0.25.0 datasets==2.15.0 fire==0.5.0
+          huggingface-hub==0.19.4 numpy==1.26.4 protobuf==4.25.5
+          sentencepiece==0.1.99 tokenizers==0.15.0 tqdm==4.66.4
+          transformers==4.36.0
+      - run: python tests/test_release_integrity.py
+      - run: python tests/test_swift_structure.py
+      - run: python tests/smoke_language_peft.py --experiment commonsense_reasoning
+      - run: python tests/smoke_commonsense_checkpoint.py
+
+  generation:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+          cache: pip
+      - run: python -m pip install torch==2.4.0 --index-url https://download.pytorch.org/whl/cpu
+      - run: >-
+          python -m pip install
+          accelerate==1.2.1 datasets==3.2.0 huggingface-hub==0.25.2
+          numpy==1.26.4 protobuf==4.25.5 sentencepiece==0.2.0
+          tokenizers==0.20.3 tqdm==4.66.4 transformers==4.45.1
+      - run: python tests/smoke_language_peft.py --experiment natural_language_generation
+      - run: python tests/smoke_nlg_checkpoint.py
+
+  vision:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.9"
+          cache: pip
+      - run: >-
+          python -m pip install torch==2.4.0 torchvision==0.19.0
+          --index-url https://download.pytorch.org/whl/cpu
+      - run: >-
+          python -m pip install
+          accelerate==0.33.0 huggingface-hub==0.25.2 numpy==1.26.4
+          peft==0.14.0 rich==13.9.4 tokenizers==0.19.1
+          transformers==4.44.0
+      - run: python tests/smoke_vision_peft.py

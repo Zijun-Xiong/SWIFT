@@ -1,0 +1,32 @@
+# Based on Facico/GOAT-PEFT requirements.txt.
+# PyTorch/torchvision/CUDA are installed by environment.yml; FlashAttention is
+# installed by scripts/install_upstream_extras.sh so build isolation can be disabled.
+accelerate==0.33.0
+datasets==2.19.2
+fire==0.6.0
+h5py==3.12.1
+hydra-core==1.3.2
+lightning==2.2.5
+matplotlib==3.9.2
+multipledispatch==1.0.0
+omegaconf==2.3.0
+pandas==2.2.3
+peft==0.14.0
+Pillow==10.4.0
+scikit-learn==1.5.2
+scipy==1.13.1
+setuptools==69.5.1
+torch==2.4.0
+torchmetrics==1.4.0.post0
+torchvision==0.19.0
+tqdm==4.66.4
+transformers==4.44.0
+wandb==0.18.3
+rich==13.9.4
+sentencepiece==0.2.0
+deepspeed==0.15.4
+human_eval==1.0.3
+huggingface-hub==0.25.2
+tokenizers==0.19.1
+numpy==1.26.4
+ninja==1.11.1.1
